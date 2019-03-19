@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>销售清单</title>
+    <script src="./jquery-3.3.1/jquery-3.3.1.min.js"></script>
+</head>
+<style>
+    .body{
+        
+        width: 100%;
+        text-align: center;
+        line-height:28px;
+    }
+    .main{
+        text-align:center;
+        font-size: 26px;
+        margin-top:20px;
+    }
+    .main2{
+        font-size: 22px;
+        margin-top:5px;
+    }
+    .a{
+        width:50%;
+        margin:auto;
+        text-align: left;
+    }
+    .company,.body input,.time{
+        display:inline-block;
+    }
+    .time{
+        margin-left:15px;
+    }
+    .body table{
+        width:50%;
+        border-collapse:collapse;
+        text-align: center;
+        margin:auto;
+        margin-top:10px;
+    }
+    .body table tr td{
+        border:2px solid;
+        width:12.5%;
+    }
+    td input{ 
+    border:1px solid #CF5C74;
+    border-radius:4px; 
+    text-align:center; 
+    font-size:14px; 
+    left:0; 
+    top:0; 
+    padding:11px 0; 
+    margin:-1px 0 0 -1px; }
+</style>
+<body>
+    <div class="body">
+        <div class="main">西安市未央区古都建材五金机电商店</div>
+        <div class="main2">销售清单</div>
+        <div class="a">
+                <div class="company">购货单位:</div>
+                <input type="text" value=""></input>
+                <div class="time">2019-03-18</div>
+        </div> 
+        <table id="table">
+            <tr>
+                <td>序号</td>
+                <td>商品名</td>
+                <td>规格</td>
+                <td>型号</td>
+                <td>单位</td>
+                <td>数量</td>
+                <td>单价</td>
+                <td>金额</td>
+            </tr>
+            <tr>
+               <td>1</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td> 
+            </tr>
+            <tr>
+                <td>总计</td>
+                <td>￥</td>
+                <td>大写：</td>
+                <td colspan="2"></td>
+                <td colspan="2">页小计：</td>
+                <td>￥</td>
+            </tr>
+        </table>
+        <div>
+            <button onclick="add()">添加行</button>
+            <button onclick="remove()">删除行</button>
+        </div>
+    </div>
+</body>
+<script>
+    var a = 0;
+    var b = 1; 
+    function add(){
+        a++;
+        b++;
+        if (b<26) {
+            $("table").find("tr").eq(a).after("<tr><td>"+b+"</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+        }else{
+            window.alert("最多25行");
+            a = 24;
+            b = 25;
+        }
+    }
+
+    function remove() {
+        if (b>1) {
+            $("table").find("tr").eq(-2).remove();
+            a--;
+            b--;
+        }else{
+            window.alert("最少1行");
+        }
+    }
+
+    $('table td').click(function(){
+        if(!$(this).is('.input')){
+            $(this).addClass('input').html('<input type="text" value="'+ $(this).text() +'" />').find('input').focus().blur(function(){
+
+            })
+        }
+    })
+</script>
+</html>
