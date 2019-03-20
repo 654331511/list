@@ -46,14 +46,16 @@
         width:12.5%;
     }
     td input{ 
-    border:1px solid #CF5C74;
-    border-radius:4px; 
-    text-align:center; 
-    font-size:14px; 
-    left:0; 
-    top:0; 
-    padding:11px 0; 
-    margin:-1px 0 0 -1px; }
+        width: 100%;
+        border:1px solid #CF5C74;
+        border-radius:4px; 
+        text-align:center; 
+        font-size:14px; 
+        left:0; 
+        top:0; 
+        padding:4px 0; 
+        margin:-1px 0 0 -1px; 
+    }
 </style>
 <body>
     <div class="body">
@@ -65,34 +67,40 @@
                 <div class="time">2019-03-18</div>
         </div> 
         <table id="table">
-            <tr>
-                <td>序号</td>
-                <td>商品名</td>
-                <td>规格</td>
-                <td>型号</td>
-                <td>单位</td>
-                <td>数量</td>
-                <td>单价</td>
-                <td>金额</td>
-            </tr>
-            <tr>
-               <td>1</td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td> 
-            </tr>
-            <tr>
-                <td>总计</td>
-                <td>￥</td>
-                <td>大写：</td>
-                <td colspan="2"></td>
-                <td colspan="2">页小计：</td>
-                <td>￥</td>
-            </tr>
+            <thead>
+                <tr>
+                    <td>序号</td>
+                    <td>商品名</td>
+                    <td>规格</td>
+                    <td>型号</td>
+                    <td>单位</td>
+                    <td>数量</td>
+                    <td>单价</td>
+                    <td>金额</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>1</td>
+                <td class="b"></td>
+                <td class="b"></td>
+                <td class="b"></td>
+                <td class="b"></td>
+                <td class="b"></td>
+                <td class="b"></td>
+                <td></td> 
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>总计</td>
+                    <td>￥</td>
+                    <td>大写：</td>
+                    <td colspan="2"></td>
+                    <td colspan="2">页小计：</td>
+                    <td>￥</td>
+                </tr>
+            </tfoot>
         </table>
         <div>
             <button onclick="add()">添加行</button>
@@ -104,10 +112,10 @@
     var a = 0;
     var b = 1; 
     function add(){
-        a++;
         b++;
         if (b<26) {
-            $("table").find("tr").eq(a).after("<tr><td>"+b+"</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+            $("#table").find("tbody").find("tr").eq(a).after('<tr><td class="b">'+b+'</td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b"></td><td class="b"></td><td></td></tr>');
+            a++;
         }else{
             window.alert("最多25行");
             a = 24;
@@ -117,7 +125,7 @@
 
     function remove() {
         if (b>1) {
-            $("table").find("tr").eq(-2).remove();
+            $("#table").find("tbody").find("tr").eq(-1).remove();
             a--;
             b--;
         }else{
@@ -125,10 +133,10 @@
         }
     }
 
-    $('table td').click(function(){
-        if(!$(this).is('.input')){
-            $(this).addClass('input').html('<input type="text" value="'+ $(this).text() +'" />').find('input').focus().blur(function(){
-
+    $("tbody").on("click",".b",function(){
+        if(!$(this).is('.input')){    
+            $(this).addClass('input').html('<input type="text" value=""/>').find('input').focus().blur(function () {
+                
             })
         }
     })
