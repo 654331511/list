@@ -56,6 +56,17 @@
         padding:4px 0; 
         margin:-1px 0 0 -1px; 
     }
+    /* .input{ 
+        width: 100%;
+        border:1px solid rgb(255, 255, 255);
+        border-radius:4px; 
+        text-align:center; 
+        font-size:14px; 
+        left:0; 
+        top:0; 
+        padding:4px 0; 
+        margin:-1px 0 0 -1px; 
+    } */
 </style>
 <body>
     <div class="body">
@@ -134,10 +145,12 @@
     }
 
     $("tbody").on("click",".b",function(){
-        if(!$(this).is('.input')){    
-            $(this).addClass('input').html('<input type="text" value=""/>').find('input').focus().blur(function () {
-                
-            })
+        if(!$(this).children().is('input')){    
+            $(this).html('<input type="text" value=""/>');
+            $("input").focus();
+            console.log($(this));
+            console.log($(this).siblings().children());
+            $(this).siblings().children().remove();
         }
     })
 </script>
